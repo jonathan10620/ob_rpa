@@ -29,9 +29,6 @@ def get_pawf_info(pid):
     """
     
     
-
-
-
     def grab_field(soup, id):
         try:
             return soup.find("input", {"id": id}, mode="first").attrs["value"].strip()
