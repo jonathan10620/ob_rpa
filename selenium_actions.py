@@ -10,4 +10,4 @@ def fetch_requested_dos():
 
 def fetch_procedure_codes():
     # TODO: grab procedure codes from details tab and populate into multiline.
-    pass
+    return '76814\n76815\n76811'

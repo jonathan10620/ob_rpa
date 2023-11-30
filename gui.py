@@ -32,8 +32,8 @@ mid_frame = [
         sg.Radio("Child", "demographic", key="demographic", default=True),
         sg.Radio("Pregnant Woman", "demographic"),
     ],
-    [sg.Text("Condition")],
-    [sg.Multiline(default_text="", key="condition", size=(30, 4))],
+    [sg.Text("Procedure Codes")],
+    [sg.Multiline(default_text="", key="procedure_codes", size=(30, 4))],
 ]
 
 bottom_frame = [
@@ -51,6 +51,7 @@ main_layout = [
 window = sg.Window("OB", main_layout, keep_on_top=True, finalize=True)
 
 pawf_data = {}
+
 #! ------------BEGIN MAIN LOOP-------------
 while True:
     event, values = window.read(timeout=150)
@@ -69,7 +70,7 @@ while True:
         gh.update_gui_field(window, 'pcn', pcn)
 
         # populate Requested DOS field
-        gh.populate_requested_dos_field()
+        gh.populate_requested_dos_field(window)
         
         # populate procedure field
         gh.populate_procedures_field(window)
