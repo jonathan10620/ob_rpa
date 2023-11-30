@@ -5,8 +5,6 @@ from gazpacho import Soup
 from pprint import pprint
 import pyperclip
 
-
-
 class PortalError(Exception):
     pass
 
@@ -16,11 +14,8 @@ class PidLengthError(PortalError):
 class PidNotNumericError(PortalError):
     pass
 
-
-
 USER = "TMHP\\jonathan.delapaz"
 PASSWORD = "XC4life123;"
-
 
 def make_request(url):
     try:
