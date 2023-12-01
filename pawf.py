@@ -76,7 +76,7 @@ def get_pawf_info(pid):
     }
     pyperclip.copy(data['client']['pcn'])
     pprint(data)
-
+    
     return data
 
 
