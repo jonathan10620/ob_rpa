@@ -5,6 +5,7 @@ from pawf import fetch_pawf_data
 import gui_helpers as gh
 from tools import calculate_age, generate_blurb
 from layout import main_layout
+from selenium_actions import load_ticket_page
 
 window = sg.Window("OB", main_layout, keep_on_top=True, finalize=True)
 
@@ -23,6 +24,7 @@ while True:
             sg.popup(str(e))
             continue
 
+
         # Update PCN field with pawf data retrieved
         pcn = pawf_data.get("client").get("pcn")
         gh.update_gui_field(window, "pcn", pcn)
@@ -32,6 +34,12 @@ while True:
 
         # populate procedure field
         gh.populate_procedures_field(window)
+
+        pan = pawf_data.get('pan')
+        load_ticket_page(pan, portal)
+        input('does it work?')
+
+
 
     if event == "copy":
         # Get gui values

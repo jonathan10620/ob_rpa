@@ -15,6 +15,8 @@ def populate_procedures_field(window):
     except ValueError as e:
         sg.popup(f'Error: {e}.')
 
+def popup(s):
+    sg.popup(f'Error: {s}')
 
 def populate_requested_dos_field(window):
     requested_dos = sel.fetch_requested_dos()
