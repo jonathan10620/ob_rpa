@@ -18,7 +18,7 @@ $trimester trimester per policy: Screening for fetal anomolies. $add_on_code$npn
 base_template = Template(BASE_COMMENT)
 
 
-def generate_blurb(portal, fax, mco_start_date, start_dos, end_dos, age, edc, trimester, dx,add_on, npn_codes, approved, month):
+def generate_blurb(portal, fax, mco_start_date, start_dos, end_dos, age, edc, trimester, dx, add_on, npn_codes, approved, month):
     if mco_start_date:
         # TODO: handle if mco_start_date exists
         mco_blurb = f" Please note, the client will be enrolled in a Managed Care Organization effective: {mco_start_date}"
@@ -43,6 +43,7 @@ def generate_blurb(portal, fax, mco_start_date, start_dos, end_dos, age, edc, tr
             'age': age,
             'edc': edc,
             'trimester': trimester,
+            'dx':dx,
             'add_on_code': add_on_blurb,
             'npn_blurb': npn_blurb
 

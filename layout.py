@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 
+sg.theme('DarkBlue8')
 top_frame = [
     [
         sg.Text("PID: "),
@@ -19,7 +20,7 @@ mid_frame = [
     ],
     [
         sg.Text("Requested DOS:"),
-        sg.InputText(key="requested_dos", size=(18)),
+        sg.InputText(key="requested_dos", size=(19)),
     ],
     [sg.Text("EDC"), sg.InputText(key="edc", size=(9))],
     [

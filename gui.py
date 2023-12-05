@@ -8,9 +8,11 @@ from tools import calculate_age, generate_blurb
 from layout import main_layout
 from selenium_actions import load_ticket_page, click_header_tab
 
+sg.theme('DarkBlue8')
 window = sg.Window("OB", main_layout, keep_on_top=True, finalize=True)
 
 pawf_data = {}
+
 
 #! ------------BEGIN MAIN LOOP-------------
 while True:
@@ -37,8 +39,7 @@ while True:
         # populate procedure field
         gh.populate_procedures_field(window)
 
-        pan = pawf_data.get("pan")
-        load_ticket_page(pan, portal)
+
 
     if event == "copy":
         # Get gui values
@@ -59,7 +60,7 @@ while True:
         try:
             dos_range = values.get("requested_dos", "<START_DOS>-<END_DOS>").split("-")
             start_dos, end_dos = dos_range[0], dos_range[1]
-        except (AttributeError, ValueError) as e:
+        except (AttributeError, ValueError, IndexError) as e:
             sg.popup(f"Error parsing Requested DOS field: {e}")
             start_dos = values.get("start_dos", "<START_DOS>")
             end_dos = values.get("end_dos", "<END_DOS>")

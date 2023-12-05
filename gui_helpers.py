@@ -9,7 +9,7 @@ def update_gui_field(window, field_key, value):
 
 def populate_procedures_field(window):
     # TODO: populates fetched proc codes into gui_field
-    procedure_codes = sel.fetch_procedure_codes()
+    procedure_codes = '\n'.join(sel.fetch_procedure_codes())
     try:
         update_gui_field(window, 'procedure_codes', procedure_codes)
     except ValueError as e:
