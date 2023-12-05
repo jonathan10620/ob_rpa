@@ -24,7 +24,6 @@ while True:
             sg.popup(str(e))
             continue
 
-
         # Update PCN field with pawf data retrieved
         pcn = pawf_data.get("client").get("pcn")
         gh.update_gui_field(window, "pcn", pcn)
@@ -37,9 +36,6 @@ while True:
 
         pan = pawf_data.get('pan')
         load_ticket_page(pan, portal)
-        input('does it work?')
-
-
 
     if event == "copy":
         # Get gui values
