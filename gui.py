@@ -4,8 +4,9 @@ import pyperclip
 from pawf import fetch_pawf_data
 import gui_helpers as gh
 from tools import calculate_age, generate_blurb
+
 from layout import main_layout
-from selenium_actions import load_ticket_page
+from selenium_actions import load_ticket_page, click_header_tab
 
 window = sg.Window("OB", main_layout, keep_on_top=True, finalize=True)
 
@@ -28,14 +29,13 @@ while True:
         pcn = pawf_data.get("client").get("pcn")
         gh.update_gui_field(window, "pcn", pcn)
 
-        # populate Requested DOS field
+        pan = pawf_data.get("pan")
+        load_ticket_page(pan, portal)
+        click_header_tab()
         gh.populate_requested_dos_field(window)
 
         # populate procedure field
         gh.populate_procedures_field(window)
-
-        pan = pawf_data.get('pan')
-        load_ticket_page(pan, portal)
 
     if event == "copy":
         # Get gui values
@@ -43,8 +43,8 @@ while True:
         mco_start_date = values.get("mco_start_date", "<MCO_START_DATE>")
         edc = values.get("edc", "<EDC>")
         dx = values.get("dx", "<DIAGNOSIS>")
-        approved = values.get('approved', None)
-        pend = values.get('pend', None)
+        approved = values.get("approved", None)
+        pend = values.get("pend", None)
 
         if values.get("T1"):
             trimester = "first"
@@ -66,17 +66,16 @@ while True:
             fax = pawf_data.get("provider", {}).get("fax", "<FAX>")
             dob = pawf_data.get("client", {}).get("dob")
             age = calculate_age(dob) if dob else "<AGE>"
-            rec_date = pawf_data.get('rec_date')
-            month = rec_date.strftime('%B') if rec_date else "<MONTH>"
+            rec_date = pawf_data.get("rec_date")
+            month = rec_date.strftime("%B") if rec_date else "<MONTH>"
         except (AttributeError, KeyError) as e:
             sg.popup(f"Error: {e}")
             fax = "<FAX>"
             age = "<AGE>"
             month = "<MONTH>"
-        
-        add_on_codes = ['ADDONCODE']
-        npn_codes = ['NPNCODE', 'NPNCODE']
-        
+
+        add_on_codes = ["ADDONCODE"]
+        npn_codes = ["NPNCODE", "NPNCODE"]
 
         comment = generate_blurb(
             portal,

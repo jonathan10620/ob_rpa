@@ -36,7 +36,6 @@ def load_ticket_page(auth, portal):
     driver.execute_script("document.body.style.zoom=' 50%'")
 
 def click_header_tab():
-    time.sleep(1)
     css_selector = "#ops-auth-tabs > ul > li:nth-child(2) > a"
     xpath = '//*[@id="ops-auth-tabs"]/ul/li[2]/a'
     full_x = "/html/body/div[1]/main/div[3]/ul/li[2]/a"
@@ -52,10 +51,18 @@ def click_header_tab():
         except Exception as e:
             print(f"Clicking header tab failed for {method}: {value}")
 
-
-
 def fetch_requested_dos():
-    return '11/01/2023-11/01/2023'
+    try:
+        from_date = driver.find_element(By.ID, "FromDate").get_attribute("value")
+        through_date = driver.find_element(By.ID, "ThroughDate").get_attribute("value")
+        dos = f"{from_date}-{through_date}"
+        return dos
+    except Exception as e:
+        print(f"Error updating requested_dos: {e}")
+
+
+
+
 
 
 

@@ -9,12 +9,6 @@ def calculate_age(born):
     return today.year - born.year - ((today.month, today.day)< (born.month, born.day))
 
 
-
-
-
-
-
-
 BASE_COMMENT = "Portal ID: $portal. Fax #: $fax. Client is eligible.$mco_start_date Provider is eligible. \
 Duplicates/history checked.  Submitter certification page submitted & completed. \
 'Requested DOS: $start_dos-$end_dos. Client Age: $age. Estimate Date of Confinement: $edc. \
