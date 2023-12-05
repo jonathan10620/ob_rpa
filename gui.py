@@ -39,8 +39,8 @@ while True:
         mco_start_date = values.get("mco_start_date", "<MCO_START_DATE>")
         edc = values.get("edc", "<EDC>")
         dx = values.get("dx", "<DIAGNOSIS>")
-        approved = values.get('approved')
-        pend = values.get('pend')
+        approved = values.get('approved', None)
+        pend = values.get('pend', None)
 
         if values.get("T1"):
             trimester = "first"
@@ -50,21 +50,25 @@ while True:
             trimester = "third"
 
         try:
-            start_dos, end_dos = values.get("requested_dos").split("-")
-        except ValueError as e:
-            sg.popup(f"Requested DOS field empty or incorrect. {e}")
-            start_dos = "<START_DOS>"
-            end_dos = "<END_DOS>"
+            dos_range = values.get("requested_dos", "<START_DOS>-<END_DOS>").split("-")
+            start_dos, end_dos = dos_range[0], dos_range[1]
+        except (AttributeError, ValueError) as e:
+            sg.popup(f"Error parsing Requested DOS field: {e}")
+            start_dos = values.get("start_dos", "<START_DOS>")
+            end_dos = values.get("end_dos", "<END_DOS>")
 
         # get pawf values
         try:
-            fax = pawf_data.get("provider").get("fax")
-            age = calculate_age(pawf_data.get("client").get("dob"))
-            month = pawf_data.get('rec_date').strftime('%B')
-        except AttributeError as e:
+            fax = pawf_data.get("provider", {}).get("fax", "<FAX>")
+            dob = pawf_data.get("client", {}).get("dob")
+            age = calculate_age(dob) if dob else "<AGE>"
+            rec_date = pawf_data.get('rec_date')
+            month = rec_date.strftime('%B') if rec_date else "<MONTH>"
+        except (AttributeError, KeyError) as e:
             sg.popup(f"Error: {e}")
             fax = "<FAX>"
             age = "<AGE>"
+            month = "<MONTH>"
         
         add_on_codes = ['ADDONCODE']
         npn_codes = ['NPNCODE', 'NPNCODE']
