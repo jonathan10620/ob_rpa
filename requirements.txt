@@ -6,6 +6,7 @@ cryptography==41.0.7
 gazpacho==1.1
 h11==0.14.0
 idna==3.6
+lxml==4.9.3
 outcome==1.3.0.post0
 pycparser==2.21
 pyperclip==1.8.2
