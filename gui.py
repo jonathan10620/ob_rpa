@@ -37,12 +37,9 @@ while True:
         # populate procedure field
         gh.populate_procedures_field(window)
 
-<<<<<<< HEAD
-=======
         pan = pawf_data.get("pan")
         load_ticket_page(pan, portal)
 
->>>>>>> e6b5ffddf035a15abbf0f868dcf4a3d3c86331b5
     if event == "copy":
         # Get gui values
         portal = values.get("portal_id", "<PORTAL_ID>")
